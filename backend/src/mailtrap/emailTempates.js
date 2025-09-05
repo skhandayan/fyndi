@@ -93,3 +93,69 @@ export const PASSWORD_RESET_REQUEST_TEMPLATE = `
 </body>
 </html>
 `;
+
+export const WELCOME_TEMPLATE = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome Email</title>
+</head>
+<body style="margin:0; padding:0; font-family: Arial, sans-serif; background-color:#f4f4f4;">
+  <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:20px 0;">
+    <tr>
+      <td align="center">
+        <table border="0" cellpadding="0" cellspacing="0" width="600" style="background:#ffffff; border-radius:8px; overflow:hidden;">
+          
+          <!-- Logo -->
+          <!-- Logo -->
+          <tr>
+            <td align="center" style="padding:30px 0 10px 0;">
+              <img src="https://i.ibb.co/Mky5dkXn/fyndi-logo.png" alt="fyndi-logo" alt="Fyndi Logo" width="150" style="max-width:100%; height:auto; display:block;">
+            </td>
+          </tr>
+
+
+          <!-- Greeting -->
+          <tr>
+            <td style="padding: 20px 40px; font-size:16px; color:#333;">
+              <h2 style="margin:0 0 10px 0;">Welcome, {firstName}!</h2>
+              <p style="margin:0 0 15px 0;">Thanks for choosing Fyndi! We are happy to see you on board.</p>
+              <p style="margin:0 0 25px 0;">To get started, do the next step:</p>
+              <p style="text-align:center;">
+                <a href="#" style="background:#3c8af1; color:#fff; padding:12px 25px; border-radius:6px; text-decoration:none; font-weight:bold;">
+                  Go to Homepage
+                </a>
+              </p>
+            </td>
+          </tr>
+
+          <!-- Image -->
+          <tr>
+            <td align="center" style="padding: 10px 20px;">
+              <img src="https://i.ibb.co/nNSfchvH/Gressel-Jean.jpg" alt="Gressel-Jean" width="500" style="max-width:100%; border-radius:8px;">
+            </td>
+          </tr>
+
+          <!-- Closing text -->
+          <tr>
+            <td style="padding: 20px 40px; font-size:14px; color:#555;">
+              <p style="margin:0;">We hope you enjoy this journey as much as we enjoy creating it for you.</p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding:20px; font-size:12px; color:#aaa; border-top:1px solid #eee;">
+              <p style="margin:0;">Copyright © 2025 Fyndi. All rights reserved.</p>
+              <a href="#" style="color:#aaa; text-decoration:underline;">Unsubscribe</a>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+`;
