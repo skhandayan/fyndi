@@ -8,11 +8,15 @@ import { generateVerificationToken } from "../utils/generateVerificationToken.js
 import { sendPasswordResetEmail, sendResetSuccessEmail, sendVerificationEmail, sendWelcomeEmail,  } from "../mailtrap/emails.js";
 
 export const signup = async (req, res) => { 
-  const { email, password, firstName, lastName } = req.body;
+  const { email, password, confirmPassword, firstName, lastName } = req.body;
 
   try {
-    if(!email || !password || !firstName || !lastName) {
+    if(!email || !password || !confirmPassword || !firstName || !lastName) {
       throw new error("All fields are required");
+    }
+
+    if(password !== confirmPassword) {
+      return res.status(400).json({ success: false, message: "Password do not match" })
     }
 
     const userAlreadyExists = await User.findOne({email});

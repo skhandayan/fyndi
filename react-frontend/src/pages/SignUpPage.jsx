@@ -1,0 +1,175 @@
+import React from 'react'
+import Background from '../components/Background'
+import AnimatedContent from '../components/AnimatedContent'
+import { useState } from 'react';
+import { Loader, Lock, LockIcon, Mail, User } from 'lucide-react';
+import Input from '../components/Input';
+import { Link, useNavigate } from 'react-router';
+import PasswordStrengthMeter from '../components/PasswordStrenghtMeter';
+import { useAuthStore } from '../store/authStore';
+
+const SignUpPage = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const { signup, isLoading } = useAuthStore();
+
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+  let typingTimeout = null;
+
+  // Handle typing
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setIsTyping(true);
+
+    if (typingTimeout) clearTimeout(typingTimeout);
+    typingTimeout = setTimeout(() => {
+      setIsTyping(false);
+    }, 1000); // 1 second after user stops typing
+  };
+
+  const isPasswordMismatch = confirmPassword.length > 0 && confirmPassword !== password;
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    // Handle sign-up logic here
+    try {
+      await signup(firstName, lastName , email, password, confirmPassword)
+      navigate("/verify-email")
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
+  return (
+    <>
+      <Background />
+
+      <div className="flex items-center justify-center h-dvh">
+        <AnimatedContent
+          distance={200}
+          direction="vertical"
+          reverse={false}
+          duration={0.8}
+          ease="power3.out"
+          initialOpacity={6}
+          animateOpacity
+          scale={1.1}
+          threshold={0.2}
+          delay={0.2}
+        >
+          <div className='max-w-md w-full md:w-screen p-8 border bg-white/70  border-blue-200 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden'
+          >
+            <h2 className='text-3xl font-bold mb-6 text-center text-blue-500'>Create Account</h2>
+
+            <form 
+              className=''
+              onSubmit={handleSignUp} 
+            >
+              <Input
+                icon={User}
+                type='text'
+                placeholder='First Name'
+                value={firstName}
+                required
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+              <Input
+                icon={User}
+                type='text'
+                placeholder='Last Name'
+                value={lastName}
+                required
+                onChange={(e) => setLastName(e.target.value)}
+              />
+              <Input
+                icon={Mail}
+                type='email'
+                placeholder='Email Address'
+                value={email}
+                required
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <Input
+                icon={Lock}
+                type='password'
+                placeholder='Password'
+                value={password}
+                required
+                onChange={handlePasswordChange}
+                onFocus={() => setIsPasswordFocused(true)}
+                onBlur={() => setIsPasswordFocused(false)}
+              />
+
+              {(isPasswordFocused || isTyping) && (
+                <PasswordStrengthMeter password={password} />
+              )}
+
+              <Input
+                icon={LockIcon}
+                type='password'
+                placeholder='Confirm Password'
+                value={confirmPassword}
+                required
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+
+              {isPasswordMismatch && (
+                <p className="text-[10px] ml-1 text-red-500 mt-3 mb-5">Passwords do not match</p>
+              )}
+
+              <p className="text-xs text-gray-600 my-4">
+                <label className="flex items-center cursor-pointer space-x-2">
+                  <input type="checkbox" required className="form-checkbox" />
+                  <span>
+                    You agree to Fyndi's{' '}
+                    <a href="/terms" className="text-blue-500 font-medium hover:underline">
+                      Terms of Service
+                    </a>{' '}
+                    and{' '}
+                    <a href="/privacy" className="text-blue-500  font-medium hover:underline">
+                      Privacy Policy
+                    </a>.
+                  </span>
+                </label>
+              </p>
+
+              <button
+                className='mt-5 w-full py-3 px-4 bg-gradient-to-r from-[#10DE8F] to-[#3FAFFF] text-white 
+                font-bold rounded-lg shadow-lg hover:opacity-80 transition duration-200 cursor-pointer'
+                type='submit'
+                disabled={isLoading}
+              >
+                {isLoading ? <Loader className='animate-spin mx-auto' size={24} /> : "Sign Up"}
+              </button>
+
+              <div className='px-8 py-4 flex justify-center'>
+                <p className='text-xs text-gray-600'>
+                  Already have an account?{" "}
+                  <Link to={"/login"} className='text-blue-500 font-medium hover:underline'>
+                    Login
+                  </Link>
+                </p>
+              </div>
+            </form>
+            
+          </div>
+          
+        </AnimatedContent>
+      </div>
+      
+      
+    </>
+  )
+}
+
+export default SignUpPage
+
+
