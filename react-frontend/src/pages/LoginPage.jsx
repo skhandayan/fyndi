@@ -72,7 +72,7 @@ const LoginPage = () => {
                 {isLoading ? "Loging In..." : "Login"}
               </button>
 
-              <div className='px-8 py-4 flex justify-center'>
+              <div className='py-4 flex justify-center'>
                 <p className='text-xs text-gray-600'>
                   Don't have an account yet?{" "}
                   <Link to={"/signup"} className='text-blue-500 font-medium hover:underline'>
