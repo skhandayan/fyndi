@@ -68,6 +68,8 @@ const SignUpPage = () => {
       setFormError(error.response?.data?.message || "Error creating account");
     }
 
+
+    
   };
 
   return (
