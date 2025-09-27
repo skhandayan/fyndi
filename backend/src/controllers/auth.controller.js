@@ -8,10 +8,10 @@ import { generateVerificationToken } from "../utils/generateVerificationToken.js
 import { sendPasswordResetEmail, sendResetSuccessEmail, sendVerificationEmail, sendWelcomeEmail,  } from "../mailtrap/emails.js";
 
 export const signup = async (req, res) => { 
-  const { email, password, confirmPassword, firstName, lastName } = req.body;
+  const { firstName, lastName, email, password, confirmPassword } = req.body;
 
   try {
-    if(!email || !password || !confirmPassword || !firstName || !lastName) {
+    if(!firstName || !lastName || !email || !password || !confirmPassword) {
       throw new error("All fields are required");
     }
 
