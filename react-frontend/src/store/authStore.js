@@ -1,7 +1,12 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/auth" : "/api/auth";
+const API_URL =
+  import.meta.env.MODE === "development"
+    ? "http://localhost:5000/api/auth"
+    : import.meta.env.VITE_API_URL + "/api/auth";
+
+
 
 axios.defaults.withCredentials = true;
 
@@ -27,7 +32,7 @@ export const useAuthStore = create((set) => ({
   login: async (email, password) => {
     set({ isLoading: true, error: null });
     try {
-      const response = await axios.post(`${API_URL}/login`, { email, password });
+      const response = await axios.post(`${API_URL}/login`, { email, password }, {withCredentials: true});
       set({
         isAuthenticated:true, 
         user:response.data.user, 
@@ -43,7 +48,7 @@ export const useAuthStore = create((set) => ({
   logout: async () => {
     set({ isLoading: true, error: null});
     try {
-      await axios.post(`${API_URL}/logout`)
+      await axios.post(`${API_URL}/logout`, {withCredentials: true})
       set({
         user: null,
         isAuthenticated: false,
@@ -74,7 +79,7 @@ export const useAuthStore = create((set) => ({
   checkAuth: async () => {
 		set({ isCheckingAuth: true, error: null });
 		try {
-			const response = await axios.get(`${API_URL}/check-auth`);
+			const response = await axios.get(`${API_URL}/check-auth`, { withCredentials: true});
 			set({ user: response.data.user, isAuthenticated: true, isCheckingAuth: false });
 		// eslint-disable-next-line no-unused-vars
 		} catch (error) {
