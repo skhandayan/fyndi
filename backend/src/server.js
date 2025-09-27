@@ -13,14 +13,24 @@ const PORT = process.env.PORT || 5000;
 
 const __dirname = path.resolve();
 
-if (process.env.NODE_ENV !=="production") {
+if (process.env.NODE_ENV !== "production") {
+  // Local development
   app.use(
-  cors({ 
-    origin: "http://localhost:5173", 
-    credentials: true
-  })
-)
+    cors({
+      origin: "http://localhost:5173",
+      credentials: true,
+    })
+  );
+} else {
+  // Production
+  app.use(
+    cors({
+      origin: "https://fyndi.onrender.com",
+      credentials: true,
+    })
+  );
 }
+
 
 app.use(express.json());
 app.use(cookieParser())
