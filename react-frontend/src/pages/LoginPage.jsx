@@ -45,7 +45,6 @@ const LoginPage = () => {
                 type='email'
                 placeholder='Email Address'
                 value={email}
-                required
                 onChange={(e) => setEmail(e.target.value)}
               />
               <Input
@@ -53,7 +52,6 @@ const LoginPage = () => {
                 type='password'
                 placeholder='Password'
                 value={password}
-                required
                 onChange={(e) => setPassword(e.target.value)}
               />
 

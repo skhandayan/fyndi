@@ -17,7 +17,7 @@ const SignUpPage = () => {
 
   const navigate = useNavigate();
 
-  const { signup, isLoading } = useAuthStore();
+  const { signup, isLoading, error} = useAuthStore();
 
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
@@ -120,6 +120,8 @@ const SignUpPage = () => {
                 required
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
+
+              {error && <p className='text-xs ml-1 text-red-500 mt-3 mb-5'>{error}</p>}
 
               {isPasswordMismatch && (
                 <p className="text-[10px] ml-1 text-red-500 mt-3 mb-5">Passwords do not match</p>

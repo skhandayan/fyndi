@@ -1,10 +1,15 @@
 import React from 'react'
+import Background from '../components/Background'
 
 const ForgotPasswordPage = () => {
   return (
-    <div>
-      forgot Password Page
-    </div>
+    <>
+      <Background />
+
+      <div>
+        forgot Password Page
+      </div>
+    </>
   )
 }
 

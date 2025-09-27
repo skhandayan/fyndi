@@ -71,22 +71,14 @@ export const useAuthStore = create((set) => ({
   },
 
   checkAuth: async () => {
-    set({ isCheckingAuth: true, error: null });
-    try {
-      const response = await axios.get(`${API_URL}/check-auth`);
-      set({
-        user: response.data.user,
-        isAuthenticated: true,
-        isCheckingAuth: false,
-      });
-    // eslint-disable-next-line no-unused-vars
-    } catch (error) {
-      set({
-        error: null,
-        isAuthenticated: false,
-        isCheckingAuth: false, // must set to false or you'll get stuck
-      }); 
-    }
-  },
+		set({ isCheckingAuth: true, error: null });
+		try {
+			const response = await axios.get(`${API_URL}/check-auth`);
+			set({ user: response.data.user, isAuthenticated: true, isCheckingAuth: false });
+		// eslint-disable-next-line no-unused-vars
+		} catch (error) {
+			set({ error: null, isCheckingAuth: false, isAuthenticated: false });
+		}
+	},
 
 }));
