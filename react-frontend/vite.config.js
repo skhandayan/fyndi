@@ -8,20 +8,20 @@ export default defineConfig({
     react(),
   ],
 
-  // build: {
-  //   chunkSizeWarningLimit: 1600, // 📌 increase chunk size limit
+  build: {
+    chunkSizeWarningLimit: 1600, // 📌 increase chunk size limit
 
-  //   rollupOptions: {
-  //     output: {
-  //       manualChunks: {
-  //         react: ["react", "react-dom"],
-  //         vendor: [
-  //           "react-router",
-  //           "lucide-react",
-  //           "react-hot-toast",
-  //         ],
-  //       },
-  //     },
-  //   },
-  // },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ["react", "react-dom"],
+          vendor: [
+            "react-router",
+            "lucide-react",
+            "react-hot-toast",
+          ],
+        },
+      },
+    },
+  },
 });
