@@ -8,7 +8,7 @@
   "devDependencies": {},
   "scripts": {
     "build": "npm install --prefix backend && npm install --prefix react-frontend && npm run build --prefix react-frontend",
-    "start": "npm run start --prefix backend"
+    "start": "NODE_ENV=production npm run start --prefix backend"
   },
   "repository": {
     "type": "git",
