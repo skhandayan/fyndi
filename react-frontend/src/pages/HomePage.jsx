@@ -42,7 +42,7 @@ const HomePage = () => {
           <div className="max-w-xl mx-auto space-y-4">
             {user && (
               <div className="mb-4 text-gray-700 font-medium">
-                Welcome back, {user.firstName} 👋
+                Welcome back, {user.firstName}
               </div>
             )}
 
@@ -62,14 +62,14 @@ const HomePage = () => {
             <div className="bg-white p-4 rounded-xl shadow-sm">
               <h3 className="font-semibold text-gray-800">John Doe</h3>
               <p className="text-gray-600 text-sm mt-1">
-                Just joined this new app! 🚀
+                Just joined this new app!
               </p>
             </div>
 
             <div className="bg-white p-4 rounded-xl shadow-sm">
               <h3 className="font-semibold text-gray-800">Jane Smith</h3>
               <p className="text-gray-600 text-sm mt-1">
-                Loving the clean design here ✨
+                Loving the clean design here
               </p>
             </div>
           </div>
@@ -79,8 +79,8 @@ const HomePage = () => {
         <aside className="hidden lg:block w-64 bg-white shadow-sm p-4">
           <h2 className="font-semibold text-gray-700 mb-3">Suggestions</h2>
           <ul className="space-y-2 text-sm text-gray-600">
-            <li>⭐ Follow Tech Trends</li>
-            <li>⭐ Join Design Group</li>
+            <li>Follow Tech Trends</li>
+            <li>Join Design Group</li>
           </ul>
         </aside>
       </div>
