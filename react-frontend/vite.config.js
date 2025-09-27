@@ -8,10 +8,6 @@ export default defineConfig({
     react(),
   ],
 
-  server: {
-    host: true,
-  },
-
   build: {
     chunkSizeWarningLimit: 1600, // 📌 increase chunk size limit
 
