@@ -23,14 +23,15 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 
 if (process.env.NODE_ENV === "production") {
-  // Serve React build
+  // Serve static files
   app.use(express.static(path.join(__dirname, "../react-frontend/dist")));
 
-  // SPA fallback
-  app.get("/*", (req, res) => {
+  // SPA fallback: use a wildcard middleware
+  app.use((req, res) => {
     res.sendFile(path.resolve(__dirname, "../react-frontend/dist", "index.html"));
   });
 }
+
 
 app.listen(PORT, () => {
   connectDB();
