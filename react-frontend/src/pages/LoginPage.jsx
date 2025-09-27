@@ -6,6 +6,7 @@ import { useAuthStore } from '../store/authStore'
 import AnimatedContent from "../components/AnimatedContent"
 import Background from "../components/Background"
 import Input from "../components/Input";
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -15,8 +16,8 @@ const LoginPage = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    await login(email, password);
+    await login( email, password);
+    toast.success(`Welcome back ${email}`);
   }
 
   return (
@@ -36,7 +37,7 @@ const LoginPage = () => {
           threshold={0.2}
           delay={0.2}
         >
-          <div className='max-w-md w-full md:w-screen p-8 border bg-white/70  border-blue-200 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden'
+          <div className="max-w-md w-full md:w-screen p-8 border bg-white/70 border-blue-200 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden"
           >
             <h2 className='text-3xl font-bold mb-6 text-center text-blue-500'>Login</h2>
             <form onSubmit={handleLogin}>

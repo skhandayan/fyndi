@@ -17,7 +17,7 @@ const Input = ({ icon: Icon, type, ...props }) => {
 				{...props}
 				type={isPassword ? (showPassword ? 'text' : 'password') : type}
 				className='w-full pl-10 pr-10 py-3 bg-white bg-opacity-50 rounded-lg border border-gray-300 
-					focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none text-black text-[16px] md:text-[14px] 
+					focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none text-black text-[14px] 
 					placeholder-gray-400 transition duration-200'
 			/>
 

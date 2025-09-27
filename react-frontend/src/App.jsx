@@ -87,9 +87,48 @@ const App = () => {
           }
         />
       </Routes>
-      <Toaster />
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        toastOptions={{
+          className: "",
+          style: {
+            width: "90%",
+            maxWidth: "420px",  
+            borderRadius: "12px",
+            padding: "12px 16px",
+            fontSize: "14px",
+          },
+          success: {
+            style: {
+              background: "#ECFDF5",
+              color: "#065F46",
+              border: "1px solid #34D399",
+              fontWeight: "500",
+            },
+            iconTheme: {
+              primary: "#10B981",
+              secondary: "#ffffff",
+            },
+          },
+          error: {
+            style: {
+              background: "#FEF2F2",
+              color: "#991B1B",
+              border: "1px solid #F87171",
+            },
+            iconTheme: {
+              primary: "#EF4444",
+              secondary: "#ffffff",
+            },
+          },
+        }}
+      />
+
     </>
   );
 };
 
 export default App;
+
+
