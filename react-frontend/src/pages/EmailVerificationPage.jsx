@@ -49,7 +49,7 @@ const EmailVerificationPage = () => {
     try {
       await verifyEmail(verificationCode);
       navigate("/home");
-      toast.success("Email verified successfully");
+      toast.success("Email verified successfully", { duration: 2000 });
     } catch (error) {
       console.log(error);
       toast.error("Email verification failed. Please try again.");
@@ -86,7 +86,7 @@ const EmailVerificationPage = () => {
           >
             <h2 className='text-3xl font-bold mb-6 text-center text-blue-500'>Verify Your Email</h2>
             <p className="text-xs text-gray-500 text-center mt-2 mb-5">
-              We’ve sent a 6-digit verification code to your email. <br />
+              We've sent a 6-digit verification code to your email. <br />
               Please enter it below to continue.
             </p>
 

@@ -61,7 +61,7 @@ const SignUpPage = () => {
     try {
       await signup(firstName, lastName, email, password, confirmPassword);
       
-      toast.success("Account created successfully! Please verify your email.");
+      toast.success("Account created successfully! Please verify your email.", { duration: 2000 });
 
       navigate("/verify-email");
     } catch (error) {
