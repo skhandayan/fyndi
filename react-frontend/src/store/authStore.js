@@ -14,15 +14,33 @@ export const useAuthStore = create((set) => ({
   message: null,
 
   signup: async (firstName, lastName, email, password, confirmPassword) => {
-    set({ isLoading: true, error: null });
-    try {
-      const response = await axios.post(`${API_URL}/signup`, { firstName, lastName, email, password, confirmPassword });
-      set({user:response.data.user, isAuthenticated:true, isLoading:false});
-    } catch (error) {
-      set({error:error.response?.data?.message || "Error signing up", isLoading:false})
-      throw error;
-    }
-  },
+  set({ isLoading: true, error: null });
+  try {
+    const response = await axios.post(`${API_URL}/signup`, {
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
+    });
+
+    // If your backend doesn't return user data until verification, just clear loading
+    set({
+      user: response.data?.user || null,
+      isAuthenticated: !!response.data?.user, // true if user returned, false otherwise
+      isLoading: false,
+    });
+
+    return response.data; // <-- Important: return data so SignUpPage can continue
+  } catch (error) {
+    set({
+      error: error.response?.data?.message || "Error signing up",
+      isLoading: false,
+    });
+    throw error;
+  }
+},
+
 
   login: async (email, password) => {
     set({ isLoading: true, error: null });

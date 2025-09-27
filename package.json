@@ -1,11 +1,12 @@
 {
   "dependencies": {
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "nodemailer": "^7.0.6",
+    "nodemailer-sendgrid-transport": "^0.2.0"
   },
   "name": "fyndi",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "build": "npm install --prefix backend && npm install --prefix react-frontend && npm run build --prefix react-frontend",
     "start": "NODE_ENV=production npm run start --prefix backend"

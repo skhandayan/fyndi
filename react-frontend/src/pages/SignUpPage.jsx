@@ -60,14 +60,14 @@ const SignUpPage = () => {
 
     try {
       await signup(firstName, lastName, email, password, confirmPassword);
-      
+
       toast.success("Account created successfully! Please verify your email.", { duration: 2000 });
 
       navigate("/verify-email");
     } catch (error) {
-      console.error(error);
       setFormError(error.response?.data?.message || "Error creating account");
     }
+
   };
 
   return (
