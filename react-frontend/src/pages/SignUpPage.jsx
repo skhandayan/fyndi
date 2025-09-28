@@ -2,7 +2,7 @@ import React from 'react'
 import Background from '../components/Background'
 import AnimatedContent from '../components/AnimatedContent'
 import { useState } from 'react';
-import { Loader, Lock, LockIcon, Mail, User } from 'lucide-react';
+import { ArrowLeft, Loader, Lock, LockIcon, Mail, User } from 'lucide-react';
 import Input from '../components/Input';
 import { Link, useNavigate } from 'react-router';
 import PasswordStrengthMeter from '../components/PasswordStrenghtMeter';
@@ -75,6 +75,19 @@ const SignUpPage = () => {
   return (
     <>
       <Background />
+
+      <div className="absolute top-4 left-4 sm:top-6 sm:left-6">
+        <Link
+          to="/"
+          className="flex items-center px-3 py-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full shadow-sm hover:bg-gray-100 transition text-sm sm:text-base"
+        >
+          <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
+          <span className="ml-2 font-medium text-blue-600 hidden xs:inline">
+            Back
+          </span>
+        </Link>
+      </div>
+
       <div className="flex items-center justify-center h-dvh">
         <AnimatedContent
           distance={200}

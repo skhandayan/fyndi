@@ -13,7 +13,7 @@ const HomePage = () => {
     <div className="h-screen w-screen bg-gray-50 flex flex-col">
       {/* Navbar */}
       <nav className="w-full bg-white shadow-sm px-6 py-3 flex items-center justify-between">
-        <h1 className="text-xl font-bold text-gray-800">MySocial</h1>
+        <h1 className="text-xl font-bold text-gray-800">Fyndi Coco</h1>
         <button
           className='flex mt-5 py-3 px-4 bg-gradient-to-r from-[#74036a] to-[#d4102a] text-white 
           font-bold rounded-lg shadow-lg hover:opacity-80 transition duration-200 cursor-pointer'
