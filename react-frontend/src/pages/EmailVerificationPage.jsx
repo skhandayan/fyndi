@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import AnimatedContent from "../components/AnimatedContent"
 import Background from "../components/Background"
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useAuthStore } from "../store/authStore";
 import toast from "react-hot-toast";
 import { ArrowLeft } from "lucide-react";
