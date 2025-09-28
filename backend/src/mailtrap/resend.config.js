@@ -10,23 +10,23 @@ export const sender = {
   name: "Fyndi Philippines",
 };
 
-export const sendEmail = async ({ to, subject, html }) => {
-  try {
-    const { data, error } = await resend.emails.send({
-      from: `${sender.name} <${sender.email}>`,
-      to,
-      subject,
-      html,
-    });
+// export const sendEmail = async ({ to, subject, html }) => {
+//   try {
+//     const { data, error } = await resend.emails.send({
+//       from: `${sender.name} <${sender.email}>`,
+//       to,
+//       subject,
+//       html,
+//     });
 
-    if (error) {
-      console.error("Resend error:", error);
-      return { success: false, error };
-    }
+//     if (error) {
+//       console.error("Resend error:", error);
+//       return { success: false, error };
+//     }
 
-    return { success: true, data };
-  } catch (err) {
-    console.error("Unexpected error:", err);
-    return { success: false, error: err };
-  }
-};
+//     return { success: true, data };
+//   } catch (err) {
+//     console.error("Unexpected error:", err);
+//     return { success: false, error: err };
+//   }
+// };
