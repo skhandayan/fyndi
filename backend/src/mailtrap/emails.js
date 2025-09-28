@@ -8,10 +8,11 @@ import { resend, sender } from "./resend.config.js"; // <-- we'll make this inst
 
 // Verification email
 export const sendVerificationEmail = async (email, verificationToken) => {
+  const recipient = [{ email }];
   try {
     const { data, error } = await resend.emails.send({
       from: `${sender.name} <${sender.email}>`,
-      to: email,
+      to: recipient,
       subject: "Welcome to Fyndi!",
       html: VERIFICATION_EMAIL_TEMPLATE.replace("{verificationCode}", verificationToken),
     });
@@ -28,10 +29,11 @@ export const sendVerificationEmail = async (email, verificationToken) => {
 
 // Welcome email
 export const sendWelcomeEmail = async (email, firstName) => {
+  const recipient = [{ email }];
   try {
     const { data, error } = await resend.emails.send({
       from: `${sender.name} <${sender.email}>`,
-      to: email,
+      to: recipient,
       subject: `Welcome ${firstName} to Fyndi!`,
       html: WELCOME_TEMPLATE.replace("{firstName}", firstName),
     });
@@ -48,10 +50,11 @@ export const sendWelcomeEmail = async (email, firstName) => {
 
 // Password reset request
 export const sendPasswordResetEmail = async (email, resetURL) => {
+  const recipient = [{ email }];
   try {
     const { data, error } = await resend.emails.send({
       from: `${sender.name} <${sender.email}>`,
-      to: email,
+      to: recipient,
       subject: "Reset your password",
       html: PASSWORD_RESET_REQUEST_TEMPLATE.replace("{resetURL}", resetURL),
     });
@@ -68,10 +71,11 @@ export const sendPasswordResetEmail = async (email, resetURL) => {
 
 // Password reset success
 export const sendResetSuccessEmail = async (email) => {
+  const recipient = [{ email }];
   try {
     const { data, error } = await resend.emails.send({
       from: `${sender.name} <${sender.email}>`,
-      to: email,
+      to: recipient,
       subject: "Password Reset Successful",
       html: PASSWORD_RESET_SUCCESS_TEMPLATE,
     });
