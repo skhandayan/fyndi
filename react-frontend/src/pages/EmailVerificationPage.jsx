@@ -4,6 +4,7 @@ import Background from "../components/Background"
 import { useNavigate } from "react-router";
 import { useAuthStore } from "../store/authStore";
 import toast from "react-hot-toast";
+import { ArrowLeft } from "lucide-react";
 
 const EmailVerificationPage = () => {
   const [code, setCode] = useState([  "", "", "", "", "", "" ]);
