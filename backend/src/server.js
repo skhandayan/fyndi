@@ -13,7 +13,12 @@ const PORT = process.env.PORT || 5000;
 
 const __dirname = path.resolve();
 
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+import cors from "cors";
+
+app.use(cors({
+  origin: process.env.CLIENT_URL, // comes from Railway env
+  credentials: true,
+}));
 
 app.use(express.json());
 app.use(cookieParser())
