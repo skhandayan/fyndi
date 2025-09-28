@@ -6,8 +6,8 @@ dotenv.config();
 export const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const sender = {
-  email: 'fyndiphmailer@fyndi.site',
-  name: "Fyndi Philippines",
+  email: 'support@fyndi.site',
+  name: "FyndiPH",
 };
 
 // export const sendEmail = async ({ to, subject, html }) => {
