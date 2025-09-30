@@ -48,13 +48,13 @@ const ResetPasswordPage = () => {
 
     if (password !== confirmPassword) {
       setFormError("Passwords do not match");
-      toast.error("Error resetting password")
+      toast.error("Failed to reset password")
       return;
     }
 
     if (!validatePassword(password)) {
       setFormError("Password does not meet all requirements");
-      toast.error("Error resetting password")
+      toast.error("Failed to reset password")
       return;
     }
 
@@ -69,7 +69,7 @@ const ResetPasswordPage = () => {
 		} catch (error) {
       console.error(error);
 
-      const errorMsg = "Error resetting password";
+      const errorMsg = "Failed to reset password";
 
       toast.error(errorMsg);
     }

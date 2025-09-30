@@ -46,11 +46,7 @@ const App = () => {
         />
         <Route 
           path="/verify-email" 
-          element={
-            <PublicRoute>
-              <EmailVerificationPage />
-            </PublicRoute>
-          } 
+          element={ <EmailVerificationPage />} 
         />
         <Route 
           path="/login" 
@@ -95,17 +91,19 @@ const App = () => {
           className: "",
           style: {
             width: "90%",
-            maxWidth: "420px",  
+            maxWidth: "screen",  
             borderRadius: "12px",
             padding: "12px 16px",
-            fontSize: "14px",
+            fontSize: "12px",
+            alignItems: "center",
+            textAlign: "center",
           },
           success: {
             style: {
               background: "#ECFDF5",
               color: "#065F46",
               border: "1px solid #34D399",
-              fontWeight: "500",
+              fontWeight: "300",
             },
             iconTheme: {
               primary: "#10B981",
@@ -117,6 +115,7 @@ const App = () => {
               background: "#FEF2F2",
               color: "#991B1B",
               border: "1px solid #F87171",
+              fontWeight: "300"
             },
             iconTheme: {
               primary: "#EF4444",

@@ -10,6 +10,8 @@ export const useAuthStore = create((set) => ({
   isAuthenticated: false,
   error: null,
   isLoading: false,
+  isVerifying: false,
+  isResending: false,
   isCheckingAuth: true,
   message: null,
 
@@ -28,12 +30,15 @@ export const useAuthStore = create((set) => ({
     set({ isLoading: true, error: null });
     try {
       const response = await axios.post(`${API_URL}/login`, { email, password }, {withCredentials: true});
+      const user = response.data.user;
       set({
         isAuthenticated:true, 
         user:response.data.user, 
         error: null,
         isLoading:false
       });
+      
+      return user;
     } catch (error) {
       set({error:error.response?.data?.message || "Error logging in", isLoading:false})
       throw error;
@@ -60,13 +65,25 @@ export const useAuthStore = create((set) => ({
   },
   
   verifyEmail: async (code) => {
-    set({ isLoading: true, error: null });
+    set({ isVerifying: true, error: null });
     try {
       const response = await axios.post(`${API_URL}/verify-email`, { code });
-      set({ user: response.data.user, isAuthenticated: true, isLoading: false})
+      set({ user: response.data.user, isAuthenticated: true, isVerifying: false})
       return response.data
     } catch (error) {
-      set({ error: error.response?.data?.message || "Error verifying email", isLoading: false})
+      set({ error: error.response?.data?.message || "Error verifying email", isVerifying: false})
+      throw error;
+    }
+  },
+
+  resendCode: async (email) => {
+    set({ isResending: true, error: null });
+    try {
+      const response = await axios.post(`${API_URL}/resend-code`, { email });
+      set({ isResending: false, message: response.data.message });
+      return response.data;
+    } catch (error) {
+      set({ isResending: false, error: error.response?.data?.message || "Failed to resend code" });
       throw error;
     }
   },

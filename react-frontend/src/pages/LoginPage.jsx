@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { ArrowLeft, Lock, Mail } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useAuthStore } from '../store/authStore'
 
 import AnimatedContent from "../components/AnimatedContent"
@@ -11,14 +11,24 @@ import toast from "react-hot-toast";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const { login, isLoading, error } = useAuthStore();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    await login( email, password);
-    toast.success(`Welcome back ${email}`);
-  }
+    try {
+      const loggedInUser = await login(email, password);
+
+      if (loggedInUser.isVerified) {
+        toast.success(`Welcome back, ${loggedInUser.firstName}`);
+        navigate("/home");
+      } else {
+        toast.error("Please verify your email first");      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Login failed");
+    }
+  };
 
   return (
     <>
@@ -81,7 +91,7 @@ const LoginPage = () => {
                 font-bold rounded-lg shadow-lg hover:opacity-80 transition duration-200 cursor-pointer'
                 type='submit'
               >
-                {isLoading ? "Loging In..." : "Login"}
+                {isLoading ? "Logging In..." : "Login"}
               </button>
 
               <div className='py-4 flex justify-center'>

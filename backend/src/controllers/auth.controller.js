@@ -107,6 +107,40 @@ export const verifyEmail = async (req, res) => {
   }
 }
 
+export const resendVerificationCode = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ success: false, message: "Email is required" });
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    if (user.isVerified) {
+      return res.status(400).json({ success: false, message: "User already verified" });
+    }
+
+    const newVerificationToken = generateVerificationToken();
+    user.verificationToken = newVerificationToken;
+    user.verificationExpiredAt = Date.now() + 24 * 60 * 60 * 1000;
+    await user.save();
+
+    await sendVerificationEmail(user.email, newVerificationToken);
+
+    res.status(200).json({
+      success: true,
+      message: "A new verification code has been sent to your email",
+    });
+  } catch (error) {
+    console.error("Error in resendVerificationCode:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
 export async function login(req, res) {
   const { email, password } = req.body
   try {
@@ -125,7 +159,9 @@ export async function login(req, res) {
         success: false,
         message: "Invalid credentials"
       })
-    }generateTokenAndSetCookie(res, user._id);
+    }
+
+    generateTokenAndSetCookie(res, user._id);
 
     user.lastLogin = new Date();
     await user.save();

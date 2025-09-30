@@ -11,7 +11,7 @@ const EmailVerificationPage = () => {
   const inputRefs = useRef([]);
   const navigate = useNavigate();
 
-  const {error, isLoading, verifyEmail} = useAuthStore();
+  const {error, isVerifying, isResending, verifyEmail} = useAuthStore();
 
   const handleChange = (index, value) => {
     const newCode = [...code];
@@ -126,20 +126,29 @@ const EmailVerificationPage = () => {
                 font-bold rounded-lg shadow-lg hover:opacity-80 transition duration-200 cursor-pointer'
                 type='submit'
               >
-                {isLoading ? "Verifying..." : "Verify"}
+                {isVerifying ? "Verifying..." : "Verify"}
               </button>
             </form>
 
             {/* Extra info */}
             <p className="text-xs text-gray-500 text-center mt-4">
               Didn’t get the email?{" "}
-              <a
-                href="#"
+              <button
+                type="button"
+                onClick={async () => {
+                  try {
+                    await useAuthStore.getState().resendCode(useAuthStore.getState().user?.email);
+                    toast.success("Verification code resent!", { duration: 2000 });
+                  } catch (error) {
+                    toast.error(error.message || "Failed to resend code");
+                  }
+                }}
                 className="text-blue-600 hover:underline font-medium"
               >
-                Resend code
-              </a>
+                {isResending ? "Resending..." : "Resend Code"}
+              </button>
             </p>
+
           </div>
         </AnimatedContent>
       </div>
