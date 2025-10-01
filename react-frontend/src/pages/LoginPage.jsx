@@ -22,9 +22,11 @@ const LoginPage = () => {
 
       if (loggedInUser.isVerified) {
         toast.success(`Welcome back, ${loggedInUser.firstName}`);
-        navigate("/home");
+        navigate("/home")
       } else {
-        toast.error("Please verify your email first");      }
+        toast.error("Please verify your email first");
+        navigate("/verify-email")
+      }
     } catch (error) {
       toast.error(error.response?.data?.message || "Login failed");
     }
