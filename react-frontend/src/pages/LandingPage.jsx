@@ -58,7 +58,12 @@ const LandingPage = () => {
           <button onClick={() => handleScroll("pricing")} className="hover:text-blue-600 transition">Pricing</button>
           <button onClick={() => handleScroll("testimonials")} className="hover:text-blue-600 transition">Testimonials</button>
           <button onClick={() => handleScroll("faq")} className="hover:text-blue-600 transition">FAQ</button>
-          <Link to="/login" className="hover:text-blue-600 transition">Login</Link>
+          <Link
+            to="/login"
+            className="px-10 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition duration-200"
+          >
+            Login
+          </Link>
         </nav>
         <button className="md:hidden text-gray-700" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -73,7 +78,13 @@ const LandingPage = () => {
               {id}
             </button>
           ))}
-          <Link to="/login" className="hover:text-blue-600 transition">Login</Link>
+          <Link
+            to="/login"
+            className="w-full max-w-sm mx-auto px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-center font-semibold shadow-md hover:shadow-lg hover:scale-[1.02] transition duration-200 block"
+          >
+            Login
+          </Link>
+
         </div>
       )}
 
