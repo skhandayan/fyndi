@@ -1,15 +1,35 @@
 import React, { useState } from "react";
 import Background from "../components/Background";
-import { ArrowRight, CheckCircle, Sparkles, Shield, Menu, X } from "lucide-react";
+import { ArrowRight, CheckCircle, Sparkles, Shield, Menu, X, Quote, ChevronDown, ChevronUp } from "lucide-react";
 import { Link } from "react-router";
 
 const LandingPage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openFAQ, setOpenFAQ] = useState(null);
 
   const handleScroll = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setMenuOpen(false);
   };
+
+  const toggleFAQ = (i) => {
+    setOpenFAQ(openFAQ === i ? null : i);
+  };
+
+  const faqs = [
+    {
+      q: "Is Fyndi free to use?",
+      a: "Yes! You can start for free with core features. We also offer premium plans for power users."
+    },
+    {
+      q: "Will my notes sync across devices?",
+      a: "Absolutely. Your notes are instantly synced on web and mobile, so you never miss a thought."
+    },
+    {
+      q: "How secure is my data?",
+      a: "We use enterprise-grade encryption, ensuring your notes are private and secure."
+    },
+  ];
 
   return (
     <>
@@ -21,15 +41,11 @@ const LandingPage = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex gap-6 text-gray-700 font-medium">
-          <button onClick={() => handleScroll("about")} className="hover:text-blue-600 transition">
-            About
-          </button>
-          <button onClick={() => handleScroll("features")} className="hover:text-blue-600 transition">
-            Features
-          </button>
-          <Link to="/login" className="hover:text-blue-600 transition">
-            Login
-          </Link>
+          <button onClick={() => handleScroll("about")} className="hover:text-blue-600 transition">About</button>
+          <button onClick={() => handleScroll("features")} className="hover:text-blue-600 transition">Features</button>
+          <button onClick={() => handleScroll("testimonials")} className="hover:text-blue-600 transition">Testimonials</button>
+          <button onClick={() => handleScroll("faq")} className="hover:text-blue-600 transition">FAQ</button>
+          <Link to="/login" className="hover:text-blue-600 transition">Login</Link>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -41,15 +57,11 @@ const LandingPage = () => {
       {/* Mobile Nav */}
       {menuOpen && (
         <div className="absolute top-16 left-0 w-full bg-white shadow-md flex flex-col items-center gap-4 py-4 z-40 md:hidden">
-          <button onClick={() => handleScroll("about")} className="hover:text-blue-600 transition">
-            About
-          </button>
-          <button onClick={() => handleScroll("features")} className="hover:text-blue-600 transition">
-            Features
-          </button>
-          <Link to="/login" className="hover:text-blue-600 transition">
-            Login
-          </Link>
+          <button onClick={() => handleScroll("about")} className="hover:text-blue-600 transition">About</button>
+          <button onClick={() => handleScroll("features")} className="hover:text-blue-600 transition">Features</button>
+          <button onClick={() => handleScroll("testimonials")} className="hover:text-blue-600 transition">Testimonials</button>
+          <button onClick={() => handleScroll("faq")} className="hover:text-blue-600 transition">FAQ</button>
+          <Link to="/login" className="hover:text-blue-600 transition">Login</Link>
         </div>
       )}
 
@@ -82,6 +94,17 @@ const LandingPage = () => {
         </div>
       </div>
 
+      {/* About Section */}
+      <section id="about" className="py-20 bg-white">
+        <div className="max-w-5xl mx-auto px-6 md:px-12 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">About Fyndi</h2>
+          <p className="mt-6 text-gray-600 text-lg leading-relaxed">
+            Fyndi is designed to help you capture ideas, organize tasks, and stay productive. 
+            With real-time sync, powerful organization, and secure storage, it’s the all-in-one notes solution you’ve been waiting for.
+          </p>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section id="features" className="py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-6 md:px-12 text-center">
@@ -106,6 +129,47 @@ const LandingPage = () => {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-6 md:px-12 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">What Users Say</h2>
+          <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              { name: "Sarah K.", text: "Fyndi completely changed how I organize my work. It's fast, clean, and secure." },
+              { name: "Daniel M.", text: "Finally, a notes app that doesn’t feel clunky. Sync works perfectly." },
+              { name: "Liza P.", text: "Love the design and ease of use. I can’t imagine going back!" },
+            ].map((t, i) => (
+              <div key={i} className="bg-gray-50 p-6 rounded-xl shadow hover:shadow-md transition">
+                <Quote className="w-8 h-8 text-blue-500 mx-auto" />
+                <p className="mt-4 text-gray-700 italic">"{t.text}"</p>
+                <h4 className="mt-4 font-semibold text-gray-900">{t.name}</h4>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="py-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-6 md:px-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900">Frequently Asked Questions</h2>
+          <div className="mt-10 space-y-6">
+            {faqs.map((item, i) => (
+              <div key={i} className="bg-white rounded-lg shadow p-4">
+                <button
+                  onClick={() => toggleFAQ(i)}
+                  className="w-full flex justify-between items-center text-left font-medium text-gray-800"
+                >
+                  {item.q}
+                  {openFAQ === i ? <ChevronUp /> : <ChevronDown />}
+                </button>
+                {openFAQ === i && <p className="mt-3 text-gray-600">{item.a}</p>}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Banner */}
       <section className="py-16 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-center px-6">
         <h2 className="text-3xl md:text-4xl font-bold">Ready to organize your life smarter?</h2>
@@ -119,8 +183,15 @@ const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-400 text-sm py-6 text-center">
-        © {new Date().getFullYear()} Fyndi. All rights reserved.
+      <footer className="bg-gray-900 text-gray-400 text-sm py-8 px-6">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+          <p>© {new Date().getFullYear()} Fyndi. All rights reserved.</p>
+          <div className="flex gap-6">
+            <Link to="/privacy" className="hover:text-white">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-white">Terms of Service</Link>
+            <Link to="/contact" className="hover:text-white">Contact</Link>
+          </div>
+        </div>
       </footer>
     </>
   );
